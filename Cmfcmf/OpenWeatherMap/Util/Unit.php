@@ -16,11 +16,11 @@
  */
 
 namespace Cmfcmf\OpenWeatherMap\Util;
-
+use \JsonSerializable;
 /**
  * The unit class representing a unit object.
  */
-class Unit
+class Unit implements JsonSerializable
 {
     /**
      * @var float The value.
@@ -125,5 +125,14 @@ class Unit
         } else {
             return (string)$this->getValue();
         }
+    }
+
+    /**
+    * Return the serialized representation of an unit.
+    *      
+    * @return object The value, the unit and the description.
+    */
+    public function jsonSerialize() {
+        return (object)['value' => $this->value, 'unit' => $this->unit, 'description' => $this->description];
     }
 }
